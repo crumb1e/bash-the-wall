@@ -7,4 +7,4 @@ image_url="${url}${category}"
 
 image=$(wget --output-document=image.png ${image_url})
 
- gsettings set org.gnome.desktop.background picture-uri $PWD/image.png
+gsettings set org.gnome.desktop.background picture-uri $PWD/image.png
