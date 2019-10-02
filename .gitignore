@@ -1,0 +1,3 @@
+# ignore any files we generate here...
+*.png
+*.jpg
