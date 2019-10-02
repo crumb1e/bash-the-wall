@@ -1,10 +1,22 @@
 #!/bin/bash
 
 category=$1
+categories=$@
 url="https://source.unsplash.com/6000x4000/?"
 
-image_url="${url}${category}"
+# don't output a comma before the first argument. There is probably a better way to do this.
+comma=""
+for i in ${categories}; do
+    url="${url}${comma}$i"
+    comma=","
+done
 
-image=$(wget --output-document=image.png ${image_url})
+image_url="${url}"
 
-gsettings set org.gnome.desktop.background picture-uri $PWD/image.png
+
+image=$(wget --output-document=$HOME/.wallpaper/temp_image.jpeg ${image_url}) &&
+
+mv ~/.wallpaper/temp_image.jpeg ~/.wallpaper/image.jpeg &&
+rm -rf ~/.wallpaper/temp_image.jpeg
+
+feh --bg-scale ~/.wallpaper/image.jpeg
