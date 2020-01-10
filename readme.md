@@ -23,4 +23,8 @@ Alternatively add `./wall.sh` with your arguments to your startup file to genera
 
 ---
 
+## To Do
+
+* Allow a resolution to be passed in rather than always fetching 4k.
+
 Any issues either open an issue on github, or give me a shout over on twitter [@crumb1e_](https://www.twitter.com/crumb1e_)
