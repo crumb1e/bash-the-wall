@@ -6,7 +6,9 @@ Or, if you are feelin fancy, run it with no arguments for a random background. C
 This uses the unsplash API to source the images.
 
 ## Requirements/Dependencies
-You will need [feh](https://github.com/derf/feh) installed for this to work.
+If you're on linux, you will need [feh](https://github.com/derf/feh) installed for this to work.
+
+If you're on a mac, this will only work on 10.9+ as I'm using the new sqlite3 db settings introduced in Mavericks to set the wallpaper.
 
 ## Example
 
