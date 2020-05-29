@@ -8,7 +8,8 @@ This uses the unsplash API to source the images.
 ## Requirements/Dependencies
 If you're on linux, you will need [feh](https://github.com/derf/feh) installed for this to work.
 
-If you're on a mac, this will only work on 10.9+ as I'm using the new sqlite3 db settings introduced in Mavericks to set the wallpaper.
+I've tested this on macOS 10.9+ and I can't say for certain that it will work
+on earlier releases. YMMV.
 
 ## Example
 
