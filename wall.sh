@@ -13,6 +13,7 @@ done
 
 if [ ! -d "~/.wallpaper" ]
 then
+    echo "No wallpaper directory found, creating one now!"
     mkdir ~/.wallpaper
 fi
 
@@ -22,8 +23,8 @@ command_exists () {
 }
 
 mac_wallpaper () {
-    sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '~/.wallpaper/image.jpeg'";
-    killall Dock;
+    osascript -e 'tell application "System Events" to tell every desktop to set picture to "~/.wallpaper/image.jpeg"'
+    killall Dock
 }
 # end functinos
 
