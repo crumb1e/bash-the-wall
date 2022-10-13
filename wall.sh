@@ -1,15 +1,31 @@
 #!/bin/bash
 
-while getopts ":s:" opt; do
+usage() {
+    cat <<EOF
+Usage:
+    Set wallpaper: wall *prompts* (e.g wall tokyo night)
+    Save current wallpaper: wall -s *name* (saves to .wallpaper/saved/*name*.jpeg)
+EOF
+}
+
+# by default, lets get 4k images.
+resolution="3840x2160"
+
+while getopts "hs:r:" opt; do
     case $opt in
-        s) cp ~/.wallpaper/image.jpeg ~/.wallpaper/saved/$OPTARG.jpeg 
-        exit 1
+        s) cp ~/.wallpaper/image.jpeg ~/.wallpaper/saved/$OPTARG.jpeg
+        exit 1 ;;
+        r)  resolution=$OPTARG
+            # we've got the resolution, now lets get rid of the opt
+            shift $(( OPTIND - 1 )) ;;
+        h) usage
+        exit 1 ;;
     esac
 done
 
 category=$1
 categories=$@
-url="https://source.unsplash.com/6000x4000/?"
+url="https://source.unsplash.com/$resolution/?"
 
 # don't output a comma before the first argument. There is probably a better way to do this.
 comma=""

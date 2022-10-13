@@ -11,6 +11,12 @@ If you're on linux, you will need [feh](https://github.com/derf/feh) installed f
 I've tested this on macOS 10.9+ and I can't say for certain that it will work
 on earlier releases. YMMV.
 
+## Usage
+Run the script with the help flag to find out more!
+```sh
+./wall.sh -h
+```
+
 ## Example
 
 ```sh
@@ -28,6 +34,6 @@ Alternatively add `./wall.sh` with your arguments to your startup file to genera
 
 ## To Do
 
-* Allow a resolution to be passed in rather than always fetching 4k.
+* ~~Allow a resolution to be passed in rather than always fetching 4k.~~ Done!
 
 Any issues either open an issue on github, or give me a shout over on twitter [@crumb1e_](https://www.twitter.com/crumb1e_)
