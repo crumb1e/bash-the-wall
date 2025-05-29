@@ -2,3 +2,7 @@
 *.png
 *.jpg
 *.jpeg
+
+.idea
+
+api_keys.env

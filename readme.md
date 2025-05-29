@@ -5,6 +5,8 @@ Or, if you are feelin fancy, run it with no arguments for a random background. C
 
 This uses the unsplash API to source the images.
 
+You'll need an api key from unsplash as they've discontinued the source api. Place this in `api_keys.env`.
+
 ## Requirements/Dependencies
 If you're on linux, you will need [feh](https://github.com/derf/feh) installed for this to work.
 

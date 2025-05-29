@@ -1,4 +1,5 @@
 #!/bin/bash
+source api_keys.env
 
 usage() {
     cat <<EOF
@@ -25,7 +26,8 @@ done
 
 category=$1
 categories=$@
-url="https://source.unsplash.com/$resolution/?"
+oldurl="https://source.unsplash.com/$resolution/?"
+url="https://api.unsplash.com/photos/random/?client_id=$UNSPLASH_CLIENT_ID&orientation=landscape&query="
 
 # don't output a comma before the first argument. There is probably a better way to do this.
 comma=""
@@ -44,21 +46,28 @@ mac_check_dir () {
         echo "No wallpaper directory found, creating one now!"
         mkdir ~/.wallpaper
         mkdir ~/.wallpaper/saved
+        mkdir ~/.wallpaper/history
     fi
 }
 
+
 mac_wallpaper () {
-    osascript -e 'tell application "System Events" to tell every desktop to set picture to "~/.wallpaper/image.jpeg"'
-    killall Dock
+    timestamp=$(date +%s)
+    cp ~/.wallpaper/image.jpeg ~/.wallpaper/history/image_${timestamp}.jpeg
+    osascript -e "tell application \"System Events\" to set picture of every desktop to \"${HOME}/.wallpaper/history/image_${timestamp}.jpeg\""
+    # Optionally, clean up old images if needed
+    # Keep only the 5 most recent images, delete older ones
+    ls -1t ~/.wallpaper/history/image_*.jpeg | tail -n +6 | xargs -I {} rm -- {}
 }
 
 get_wallpaper () {
-    image_url="${url}"
+    wget ${url} -O ~/.wallpaper/unsplash_response.json &&
 
-    wget ${image_url} -O ~/.wallpaper/temp_image.jpeg &&
+    raw_image=`jq -r '.urls.raw' ~/.wallpaper/unsplash_response.json` &&
 
-    mv ~/.wallpaper/temp_image.jpeg ~/.wallpaper/image.jpeg &&
-    rm -rf ~/.wallpaper/temp_image.jpeg
+    wget ${raw_image} -O ~/.wallpaper/temp_image.jpeg &&
+
+    mv ~/.wallpaper/temp_image.jpeg ~/.wallpaper/image.jpeg
 }
 # end functinos
 
@@ -67,7 +76,7 @@ get_wallpaper () {
 if [[ "$OSTYPE" == "darwin"* ]]; then
     mac_check_dir
     get_wallpaper
-    mac_wallpaper ~/.wallpaper/image.jpeg
+    mac_wallpaper
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
     get_wallpaper
     if command_exists feh ; then
